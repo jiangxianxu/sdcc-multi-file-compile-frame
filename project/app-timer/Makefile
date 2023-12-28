@@ -9,27 +9,34 @@
 APP_NAME := app-timer
 
 #
-# APP除需要链接的库外，用于完成本APP逻辑的包含main函数的源文件
+# APP源文件目录
 #
 MODULE_PATH := $(SOURCE_PATH)/app/timer
 
 #
 # APP源文件编译参数
 #
-MODULE_CFLAGS += $(GLOBAL_CFLAGS)
-MODULE_INCLUDE_PATH += $(GLOBAL_INCLUDE_PATH)
+MODULE_CFLAGS := $(GLOBAL_CFLAGS)
 
 #
 # APP源文件
 #
 MODULE_SRC_FILE_LIST := \
-	$(MODULE_PATH)/main.c
+	$(MODULE_PATH)/main.c \
+	$(MODULE_PATH)/main_delay.c
+
+#
+# APP头文件目录列表
+#
+MODULE_INCLUDE_FLAGS := \
+	-I$(GLOBAL_INCLUDE_PATH)
 
 #
 # APP需要链接的其它模块的rel文件列表
 #
 MODULE_LD_LIB_LIST := \
-	$(BUILD_LIB_PATH)/isr.rel
+	$(BUILD_LIB_PATH)/isr.rel \
+	$(BUILD_LIB_PATH)/delay.rel
 
 #
 # 调用公共APP编译脚本生成本APP可执行文件

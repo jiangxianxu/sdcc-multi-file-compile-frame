@@ -19,7 +19,7 @@ all: config $(MODULE_OUT_OBJS)
 
 $(MODULE_OUT_OBJS) : $(MODULE_OUT_PATH)/%.rel : %.c
 	$(Q) echo "  CC	$(patsubst %.c,%.rel,$(notdir $<))"
-	$(Q) $(CC) $(MODULE_CFLAGS) $(MODULE_INCLUDE_PATH) -o $@ -c $<
+	$(Q) $(CC) $(MODULE_CFLAGS) $(MODULE_INCLUDE_FLAGS) -o $@ -c $<
 
 config:
 	$(Q) mkdir -p $(MODULE_OUT_PATH)

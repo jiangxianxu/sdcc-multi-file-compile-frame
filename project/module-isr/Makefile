@@ -9,20 +9,28 @@
 MODULE_NAME := isr
 
 #
-# 编译参数
-#
-MODULE_CFLAGS += $(GLOBAL_CFLAGS)
-MODULE_INCLUDE_PATH += $(GLOBAL_INCLUDE_PATH)
-
-#
 # 模块源码目录
 #
 MODULE_PATH := $(SOURCE_PATH)/isr
 
 #
+# 编译参数
+#
+MODULE_CFLAGS := \
+	$(GLOBAL_CFLAGS)
+
+#
 # 模块源文件
 #
-MODULE_SRC_FILE_LIST = $(MODULE_PATH)/isr.c
+MODULE_SRC_FILE_LIST := \
+	$(MODULE_PATH)/isr.c \
+	$(MODULE_PATH)/delay.c
+
+#
+# 模块头文件目录列表
+#
+MODULE_INCLUDE_FLAGS := \
+	-I$(GLOBAL_INCLUDE_PATH)
 
 #
 # 调用公共模块编译脚本完成模块rel文件编译

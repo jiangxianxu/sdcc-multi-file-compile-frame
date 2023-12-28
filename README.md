@@ -8,35 +8,10 @@
 
 4、由于受sdcc工具一次只能编译一个c文件的限制，所以每个模块只能由一个c文件组成
 
-5、codebase/source/main为工程入口，这个目录必须有，需要注意
+5、本工程可以同时编译多个不同逻辑的可执行文件，不同的逻辑可以是不同的app文件完成，它可以调用其它的模块实现的功能
 
-6、project目录下除build外，每个子目录都是一个模块的工程，只要子目录中有Makefile都会自动被project目录中的顶层Makefile调用，所以增加新模块时只需要增加对应的工程目录即可
+6、进入顶层目录后直接make即可完成编译
 
-7、project/main为main函数模块编译工程，必须要有
+7、编译结果位于顶层目录的build目录中
 
-8、project/app为最终将所有模块的rel文件编译成可执行文件的编译工程，必须要有
-
-9、project/app中编译可执行文件的时候默认系统中有main模块，所以在编译多个rel文件时将main.rel放在第一个，因此生成可执行的文件为main.ihx
-
-10、project/app最终会将main.ihx文件整合成xxx.bin文件，bin文件的命名由project/app/Makefile中的APP_NAME变量决定
-
-11、其它模块的MODULE_NAME要与模块的c文件名要相同(MODULE_NAME名字与c文件去掉.c时相同)
-
-12、新增模块需要在project目录中增加对应模块名的目录，并参照main等工程编写Makefile
-
-13、新增模块后需要将新增的模块中间文件要参照原有模块加入project/app/Makefile中链接到可执行文件
-
-14、在project目录中执行make命令可对整个工程所有源码进行编译，最终生成可执行文件
-
-15、执行make clean命令可对整个工程进行clean，删除所有的中间文件及可执行文件
-
-16、工程可支持模块编译，可用于多人开发不同模块的场景，也可用于模块间开发人员有源码权限限制的开发场景，模块间开发人员只需发布中间文件(rel)即可。
-
-17、执行make xxx即可完成xxx模块的编译
-
-18、执行make xxx_clean即可完成对模块xxx的clean
-
-19、执行完模块编译后还需要执行make app命令完成将所有模块的中间文件编译链接成可执行文件的操作
-
-20、project/build/lib目录用于存放所有模块的中间文件，可执行bin文件放置于project/build目录中
-
+8、添加模块或者APP可以仿造project目录中已有的app-timer和module-isr增加，当前app-timer会调用module-isr的功能完成自己的逻辑

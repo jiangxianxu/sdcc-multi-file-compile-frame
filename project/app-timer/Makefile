@@ -35,8 +35,8 @@ MODULE_INCLUDE_FLAGS := \
 # APP需要链接的其它模块的rel文件列表
 #
 MODULE_LD_LIB_LIST := \
-	$(BUILD_LIB_PATH)/isr.rel \
-	$(BUILD_LIB_PATH)/delay.rel
+	-L$(BUILD_LIB_PATH) \
+	-llibisr.a
 
 #
 # 调用公共APP编译脚本生成本APP可执行文件

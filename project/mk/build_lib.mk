@@ -3,7 +3,8 @@
 # 作者：jiangxianxu_pub@163.com
 ########################################################
 
-MODULE_OUT_PATH := $(BUILD_LIB_PATH)
+MODULE_LIB_NAME := lib$(MODULE_NAME).a
+MODULE_OUT_PATH := $(BUILD_PATH)/module-$(MODULE_NAME)
 MODULE_NODIR_SRC_FILE_LIST := $(notdir $(MODULE_SRC_FILE_LIST))
 MODULE_OBJS := $(patsubst %.c,%.rel,$(MODULE_NODIR_SRC_FILE_LIST))
 MODULE_OUT_OBJS := $(addprefix $(MODULE_OUT_PATH)/,$(MODULE_OBJS))
@@ -15,7 +16,11 @@ vpath %.c $(addsuffix :,$(dir $(MODULE_SRC_FILE_LIST)))
 
 .PHONY : all config clean
 
-all: config $(MODULE_OUT_OBJS)
+all: config $(BUILD_LIB_PATH)/$(MODULE_LIB_NAME)
+
+$(BUILD_LIB_PATH)/$(MODULE_LIB_NAME): $(MODULE_OUT_OBJS)
+	$(Q) echo "  GEN	$(MODULE_LIB_NAME)"
+	$(Q) $(AR) rcs $(BUILD_LIB_PATH)/$(MODULE_LIB_NAME) $(MODULE_OUT_OBJS)
 
 $(MODULE_OUT_OBJS) : $(MODULE_OUT_PATH)/%.rel : %.c
 	$(Q) echo "  CC	$(patsubst %.c,%.rel,$(notdir $<))"
@@ -25,5 +30,6 @@ config:
 	$(Q) mkdir -p $(MODULE_OUT_PATH)
 
 clean:
-	$(Q) rm -rf $(MODULE_CLEAN_OUT_OBJS)
+	$(Q) rm -rf $(MODULE_OUT_PATH)
+	$(Q) rm -rf $(BUILD_LIB_PATH)/$(MODULE_LIB_NAME)
 

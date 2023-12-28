@@ -14,6 +14,7 @@ GLOBAL_CFLAGS :=
 GLOBAL_INCLUDE_PATH := $(INCLUDE_PATH)
 
 export CC := sdcc
+export AR := sdar
 export OBJCOPY := sdobjcopy
 export PAKKIHX := packihx
 

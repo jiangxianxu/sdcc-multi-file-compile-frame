@@ -32,7 +32,7 @@ MODULE_INCLUDE_FLAGS := \
 	-I$(GLOBAL_INCLUDE_PATH)
 
 #
-# APP需要链接的其它模块的rel文件列表
+# APP需要链接的其它模块的库文件列表
 #
 MODULE_LD_LIB_LIST := \
 	-L$(BUILD_LIB_PATH) \

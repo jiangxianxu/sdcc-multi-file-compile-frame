@@ -9,14 +9,14 @@ MODULE_NODIR_SRC_FILE_LIST := $(notdir $(MODULE_SRC_FILE_LIST))
 MODULE_OBJS := $(patsubst %.c,%.rel,$(MODULE_NODIR_SRC_FILE_LIST))
 MODULE_OUT_OBJS := $(addprefix $(MODULE_OUT_PATH)/,$(MODULE_OBJS))
 
-MODULE_CLEAN_OBJS := $(patsubst %.c,%.*,$(MODULE_NODIR_SRC_FILE_LIST))
-MODULE_CLEAN_OUT_OBJS := $(addprefix $(MODULE_OUT_PATH)/,$(MODULE_CLEAN_OBJS))
+MODULE_DEPEND_FILE := $(addsuffix .depend,$(patsubst %.rel,%,$(MODULE_OBJS)))
+MODULE_DEPEND_FILE_LIST := $(addprefix $(MODULE_OUT_PATH)/,$(MODULE_DEPEND_FILE))
 
 vpath %.c $(addsuffix :,$(dir $(MODULE_SRC_FILE_LIST)))
 
-.PHONY : all config clean
+.PHONY : all clean
 
-all: config $(BUILD_LIB_PATH)/$(MODULE_LIB_NAME)
+all: $(BUILD_LIB_PATH)/$(MODULE_LIB_NAME) depend
 
 $(BUILD_LIB_PATH)/$(MODULE_LIB_NAME): $(MODULE_OUT_OBJS)
 	$(Q) echo "  GEN	$(MODULE_LIB_NAME)"
@@ -26,8 +26,14 @@ $(MODULE_OUT_OBJS) : $(MODULE_OUT_PATH)/%.rel : %.c
 	$(Q) echo "  CC	$(patsubst %.c,%.rel,$(notdir $<))"
 	$(Q) $(CC) $(MODULE_CFLAGS) $(MODULE_INCLUDE_FLAGS) -o $@ -c $<
 
-config:
+depend: $(MODULE_DEPEND_FILE_LIST)
+
+$(MODULE_DEPEND_FILE_LIST) : $(MODULE_OUT_PATH)/%.depend : %.c
+	$(Q) echo "  DEP	$(patsubst %.c,%.rel,$(notdir $<))"
 	$(Q) mkdir -p $(MODULE_OUT_PATH)
+	$(Q) $(CC) $(MODULE_CFLAGS) $(MODULE_INCLUDE_FLAGS) -MM $< | sed -e 1's,^,$(MODULE_OUT_PATH)/,' > $@
+
+-include $(MODULE_DEPEND_FILE_LIST)
 
 clean:
 	$(Q) rm -rf $(MODULE_OUT_PATH)

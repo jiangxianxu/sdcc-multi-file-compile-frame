@@ -11,11 +11,13 @@ MODULE_OUT_OBJS := $(addprefix $(MODULE_OUT_PATH)/,$(MODULE_OBJS))
 MODULE_DEPEND_FILE := $(addsuffix .depend,$(patsubst %.rel,%,$(MODULE_OBJS)))
 MODULE_DEPEND_FILE_LIST := $(addprefix $(MODULE_OUT_PATH)/,$(MODULE_DEPEND_FILE))
 
+MODULE_DEPEND_LIB_LIST := $(patsubst -l%,%,$(MODULE_LD_LIB_LIST))
+
 vpath %.c $(addsuffix :,$(dir $(MODULE_SRC_FILE_LIST)))
 
 .PHONY : all clean
 
-all: $(BUILD_PATH)/$(APP_NAME).bin depend
+all: depend $(BUILD_PATH)/$(APP_NAME).bin
 
 $(BUILD_PATH)/$(APP_NAME).bin: $(MODULE_OUT_PATH)/$(APP_NAME).hex
 	$(Q) echo "  GEN	$(APP_NAME).bin"
@@ -25,9 +27,9 @@ $(MODULE_OUT_PATH)/$(APP_NAME).hex: $(MODULE_OUT_PATH)/main.ihx
 	$(Q) echo "  GEN	$(APP_NAME).hex"
 	$(Q) $(PAKKIHX) $(MODULE_OUT_PATH)/main.ihx > $(MODULE_OUT_PATH)/$(APP_NAME).hex
 
-$(MODULE_OUT_PATH)/main.ihx: $(MODULE_OUT_OBJS)
+$(MODULE_OUT_PATH)/main.ihx: $(MODULE_OUT_OBJS) $(MODULE_DEPEND_LIB_LIST)
 	$(Q) echo "  GEN	main.ihx for $(APP_NAME)"
-	$(Q) $(CC) $(MODULE_OUT_OBJS) $(MODULE_LD_LIB_LIST) -o $(MODULE_OUT_PATH)/main.ihx
+	$(Q) $(CC) $(MODULE_OUT_OBJS) $(MODULE_LD_LIB_LIST) $(MODULE_LD_PUB_LIB_LIST) -o $(MODULE_OUT_PATH)/main.ihx
 
 $(MODULE_OUT_OBJS) : $(MODULE_OUT_PATH)/%.rel : %.c
 	$(Q) echo "  CC	$(patsubst %.c,%.rel,$(notdir $<))"

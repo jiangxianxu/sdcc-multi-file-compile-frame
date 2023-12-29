@@ -16,7 +16,7 @@ vpath %.c $(addsuffix :,$(dir $(MODULE_SRC_FILE_LIST)))
 
 .PHONY : all clean
 
-all: $(BUILD_LIB_PATH)/$(MODULE_LIB_NAME) depend
+all: depend $(BUILD_LIB_PATH)/$(MODULE_LIB_NAME)
 
 $(BUILD_LIB_PATH)/$(MODULE_LIB_NAME): $(MODULE_OUT_OBJS)
 	$(Q) echo "  GEN	$(MODULE_LIB_NAME)"

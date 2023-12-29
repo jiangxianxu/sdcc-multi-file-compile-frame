@@ -1,10 +1,11 @@
 
 void delay(int num)
 {
-    while(num)
-    {
-        num--;
-    }
-    return;
+	while(num)
+	{
+		num--;
+	}
+
+	return;
 }
 

@@ -17,8 +17,8 @@ void main()
 	led1 = 1;
 	Timer0Init();  //定时器0初始化
 	while (1)
-    {
-        main_delay(1000);
-    }
+	{
+		main_delay(1000);
+	}
 }
 

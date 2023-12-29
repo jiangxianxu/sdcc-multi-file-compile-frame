@@ -1,8 +1,9 @@
 
 #include "8052.h"
 #include "def.h"
-#include "isr.h"
 #include "delay.h"
+
+extern void main_delay(void);
 
 /*******************************************************************************
 * 函 数 名:    main
@@ -12,12 +13,9 @@
 *******************************************************************************/
 void main()
 {
-	led0 = 0;
-	led1 = 1;
-	Timer0Init();  //定时器0初始化
 	while (1)
 	{
-		delay_sec(1000);
+		main_delay();
 	}
 }
 

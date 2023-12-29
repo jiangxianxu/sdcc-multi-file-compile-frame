@@ -6,12 +6,12 @@
 #
 # 模块名
 #
-MODULE_NAME := isr
+MODULE_NAME := delay
 
 #
 # 模块源码目录
 #
-MODULE_PATH := $(SOURCE_PATH)/isr
+MODULE_PATH := $(SOURCE_PATH)/delay
 
 #
 # 编译参数
@@ -23,7 +23,8 @@ MODULE_CFLAGS := \
 # 模块源文件
 #
 MODULE_SRC_FILE_LIST := \
-	$(MODULE_PATH)/isr.c
+	$(MODULE_PATH)/delay_sec.c \
+	$(MODULE_PATH)/delay_msec.c
 
 #
 # 模块头文件目录列表

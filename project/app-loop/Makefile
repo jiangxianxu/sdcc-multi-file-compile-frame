@@ -6,12 +6,12 @@
 #
 # APP名称
 #
-APP_NAME := app-timer
+APP_NAME := app-loop
 
 #
 # APP源文件目录
 #
-MODULE_PATH := $(SOURCE_PATH)/app/timer
+MODULE_PATH := $(SOURCE_PATH)/app/loop
 
 #
 # APP源文件编译参数
@@ -22,7 +22,8 @@ MODULE_CFLAGS := $(GLOBAL_CFLAGS)
 # APP源文件
 #
 MODULE_SRC_FILE_LIST := \
-	$(MODULE_PATH)/main.c
+	$(MODULE_PATH)/main.c \
+	$(MODULE_PATH)/main_delay.c
 
 #
 # APP头文件目录列表
@@ -34,7 +35,6 @@ MODULE_INCLUDE_FLAGS := \
 # APP需要链接的其它模块的库文件列表，此类库文件可能经常发生变化
 #
 MODULE_LD_LIB_LIST := \
-	-l$(BUILD_LIB_PATH)/libisr.a \
 	-l$(BUILD_LIB_PATH)/libdelay.a
 
 #

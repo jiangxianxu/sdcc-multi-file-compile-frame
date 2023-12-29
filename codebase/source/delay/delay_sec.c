@@ -1,5 +1,5 @@
 
-void delay(int num)
+void delay_sec(int num)
 {
 	while(num)
 	{

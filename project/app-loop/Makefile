@@ -35,10 +35,11 @@ MODULE_INCLUDE_FLAGS := \
 # APP需要链接的其它模块的库文件列表，此类库文件可能经常发生变化
 #
 MODULE_LD_LIB_LIST := \
-	-l$(BUILD_LIB_PATH)/libdelay.a
+	-l$(BUILD_LIB_PATH)/delay.lib
 
 #
-# APP需要链接的公共库文件列表，此类库文件一般不会发生变化
+# APP需要链接的公共库文件列表，此类库文件一般不会发生变化，引用示例：
+# MODULE_LD_PUB_LIB_LIST := -L $(PUB_LIB_PATH) -lxxx.lib -lyyy.lib -lzzz.lib
 #
 MODULE_LD_PUB_LIB_LIST :=
 

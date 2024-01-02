@@ -3,7 +3,7 @@
 # 作者：jiangxianxu_pub@163.com
 ########################################################
 
-MODULE_LIB_NAME := lib$(MODULE_NAME).a
+MODULE_LIB_NAME := $(MODULE_NAME).lib
 MODULE_OUT_PATH := $(BUILD_PATH)/module-$(MODULE_NAME)
 MODULE_NODIR_SRC_FILE_LIST := $(notdir $(MODULE_SRC_FILE_LIST))
 MODULE_OBJS := $(patsubst %.c,%.rel,$(MODULE_NODIR_SRC_FILE_LIST))

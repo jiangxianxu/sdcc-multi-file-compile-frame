@@ -26,10 +26,11 @@ export GLOBAL_CFLAGS
 export GLOBAL_INCLUDE_PATH
 
 ifeq ($(V),1)
-Q =
+Q :=
+MAKE_DIR_INFO :=
 else
-Q = @
-MAKE_DIR_INFO = --no-print-directory
+Q := @
+MAKE_DIR_INFO := --no-print-directory
 endif
 
 export Q

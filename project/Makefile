@@ -3,6 +3,8 @@
 # 作者：jiangxianxu_pub@163.com
 ########################################################
 
+export ROOT_PATH ?= $(shell pwd)/..
+
 include $(ROOT_PATH)/project/mk/var.mk
 
 BUILD_APP_LIST := app-timer app-loop

@@ -21,35 +21,37 @@ CLEAN_ALL_DIRS := $(BUILD_ALL_DIRS)
 BUILD_MD_DIRS := $(filter-out $(BUILD_MD_EXCULD_DIRS),$(ALL_DIRS))
 CLEAN_MD_DIRS := $(addsuffix _clean, $(BUILD_MD_DIRS))
 
-.PHONY : config all clean $(BUILD_MD_DIRS) $(CLEAN_MD_DIRS)
+.PHONY : config all module_build clean module_clean $(BUILD_MD_DIRS) $(CLEAN_MD_DIRS)
 
 #
 # all compile/clean
 #
-all: config
-	$(Q) for dir in $(BUILD_ALL_DIRS); \
-	do \
-		echo "== Build-object $$dir"; \
-		$(MAKE) -C $$dir $(MAKE_DIR_INFO) || exit $$?; \
-	done
-
+all: config module_build
 	$(Q) for dir in $(BUILD_APP_LIST); \
 	do \
 		echo "== Build-object $$dir"; \
 		$(MAKE) -C $$dir $(MAKE_DIR_INFO) || exit $$?; \
 	done
 
-clean:
+module_build:
 	$(Q) for dir in $(BUILD_ALL_DIRS); \
 	do \
-		$(MAKE) -C $$dir clean $(MAKE_DIR_INFO) || exit $$?; \
+		echo "== Build-object $$dir"; \
+		$(MAKE) -C $$dir $(MAKE_DIR_INFO) || exit $$?; \
 	done
 
+clean: module_clean
 	$(Q) for dir in $(BUILD_APP_LIST); \
 	do \
 		$(MAKE) -C $$dir clean $(MAKE_DIR_INFO) || exit $$?; \
 	done
 	$(Q) rm -rf $(BUILD_PATH)
+
+module_clean:
+	$(Q) for dir in $(BUILD_ALL_DIRS); \
+	do \
+		$(MAKE) -C $$dir clean $(MAKE_DIR_INFO) || exit $$?; \
+	done
 
 #
 # module compile/clean

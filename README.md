@@ -15,3 +15,5 @@
 7、编译结果位于顶层目录的build目录中
 
 8、添加模块或者APP可以仿造project目录中已有的app-timer和module-isr增加，当前app-timer会调用module-isr的功能完成自己的逻辑
+
+9、当不希望对所有源码进行一次全编译时，可以在project目录中进行单个模块和单个app的编译或者clean，如执行make module_isr/make module_isr_clean/make app-timer/make app-timer_clean命令等

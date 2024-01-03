@@ -9,7 +9,7 @@ include $(ROOT_PATH)/project/mk/var.mk
 
 BUILD_APP_LIST := app-timer app-loop
 
-BUILD_MD_EXCULD_DIRS := build mk
+BUILD_MD_EXCULD_DIRS := mk
 BUILD_ALL_EXCULD_DIRS := $(BUILD_MD_EXCULD_DIRS) $(BUILD_APP_LIST)
 
 ALL_DIRS := $(shell find . -maxdepth 1 -type d)

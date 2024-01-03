@@ -15,3 +15,5 @@ all:
 clean:
 	@ $(MAKE) -C project clean --no-print-directory
 
+help:
+	@ $(MAKE) -C project help --no-print-directory

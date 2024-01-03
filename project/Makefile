@@ -65,3 +65,20 @@ $(CLEAN_MD_DIRS):
 config:
 	$(Q) mkdir -p $(BUILD_LIB_PATH)
 
+help:
+	@ echo "help info:"
+	@ echo ""
+	@ printf "%-30s %s\n" "make all" ": compile all objs"
+	@ printf "%-30s %s\n" "make clean" ": clean all objs"
+	@ echo ""
+	@ echo "**************************************************************************"
+	@ echo "* NOTE: The following commands must be executed in the project directory *"
+	@ echo "**************************************************************************"
+	@ for target in $(BUILD_MD_DIRS); \
+	do \
+		 printf "%-30s %s\n" "make $$target" ": compile $$target"; \
+		 printf "%-30s %s\n" "make "$$target"_clean" ": clean $$target"; \
+		 echo ""; \
+	done
+	@ echo ""
+	@ exit 0

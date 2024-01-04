@@ -3,35 +3,25 @@
 # 作者：jiangxianxu_pub@163.com
 ########################################################
 
-BUILD_PATH := $(ROOT_PATH)/build
-BUILD_LIB_PATH := $(BUILD_PATH)/lib
-
-CODE_BASE_PATH := $(ROOT_PATH)/codebase
-SOURCE_PATH := $(CODE_BASE_PATH)/source
-INCLUDE_PATH := $(CODE_BASE_PATH)/include
-
-GLOBAL_CFLAGS :=
-GLOBAL_INCLUDE_PATH := $(INCLUDE_PATH)
+export BUILD_PATH := $(ROOT_PATH)/build
+export BUILD_LIB_PATH := $(BUILD_PATH)/lib
+export CODE_BASE_PATH := $(ROOT_PATH)/codebase
+export SOURCE_PATH := $(CODE_BASE_PATH)/source
+export INCLUDE_PATH := $(CODE_BASE_PATH)/include
 
 export CC := sdcc
 export AR := sdar
 export OBJCOPY := sdobjcopy
 export PAKKIHX := packihx
 
-export BUILD_PATH
-export BUILD_LIB_PATH
-export CODE_BASE_PATH
-export SOURCE_PATH
-export GLOBAL_CFLAGS
-export GLOBAL_INCLUDE_PATH
+export GLOBAL_INCLUDE_PATH := $(INCLUDE_PATH)
+
+export GLOBAL_CFLAGS := -mmcs51 --model-small
 
 ifeq ($(V),1)
-Q :=
-MAKE_DIR_INFO :=
+export Q :=
+export MAKE_DIR_INFO :=
 else
-Q := @
-MAKE_DIR_INFO := --no-print-directory
+export Q := @
+export MAKE_DIR_INFO := --no-print-directory
 endif
-
-export Q
-export MAKE_DIR_INFO

@@ -29,7 +29,7 @@ $(MODULE_OUT_PATH)/$(APP_NAME).hex: $(MODULE_OUT_PATH)/main.ihx
 
 $(MODULE_OUT_PATH)/main.ihx: $(MODULE_OUT_OBJS) $(MODULE_DEPEND_LIB_LIST)
 	$(Q) echo "  GEN	main.ihx for $(APP_NAME)"
-	$(Q) $(CC) $(MODULE_OUT_OBJS) $(MODULE_LD_LIB_LIST) $(MODULE_LD_PUB_LIB_LIST) -o $(MODULE_OUT_PATH)/main.ihx
+	$(Q) $(CC) $(MODULE_CFLAGS) $(MODULE_OUT_OBJS) $(MODULE_LD_LIB_LIST) $(MODULE_LD_PUB_LIB_LIST) -o $(MODULE_OUT_PATH)/main.ihx
 
 $(MODULE_OUT_OBJS) : $(MODULE_OUT_PATH)/%.rel : %.c
 	$(Q) echo "  CC	$(patsubst %.c,%.rel,$(notdir $<))"
